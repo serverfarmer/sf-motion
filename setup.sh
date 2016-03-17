@@ -20,7 +20,7 @@ chmod 0711 $path
 chmod 0755 $path/data
 chown motion:motion $path $path/data
 
-bash /opt/farm/scripts/setup/role.sh motion
+/opt/farm/scripts/setup/role.sh motion
 
 /etc/init.d/motion stop
 update-rc.d -f motion remove
@@ -33,7 +33,7 @@ chmod 0640 $cfg
 chown root:motion $cfg
 ln -sf $cfg $path/.s3cfg
 
-if ! grep -q /opt/sf-motion/cron/archiver.sh /etc/crontab; then
+if ! grep -q /opt/farm/ext/motion/cron/archiver.sh /etc/crontab; then
 	echo >>/etc/crontab
-	echo "7 * * * * motion /opt/sf-motion/cron/archiver.sh" >>/etc/crontab
+	echo "7 * * * * motion /opt/farm/ext/motion/cron/archiver.sh" >>/etc/crontab
 fi
